@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2023 at 06:51 PM
+-- Generation Time: Oct 10, 2023 at 04:41 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -44,7 +44,11 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `karywan` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `nama_karyawan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat_karyawan` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nomor_telepon_karyawan` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_karyawan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `posisi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -82,7 +86,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (14, '2023_10_08_145504_create_produk_table', 9),
 (15, '2023_10_08_152654_create_produk_table', 10),
 (16, '2023_10_08_164951_create_pemasok_table', 11),
-(17, '2023_10_08_165022_create_karywan_table', 11);
+(17, '2023_10_08_165022_create_karywan_table', 11),
+(18, '2023_10_10_023605_create_karywan_table', 12),
+(19, '2023_10_10_023616_create_pemasok_table', 12);
 
 -- --------------------------------------------------------
 
@@ -128,9 +134,10 @@ INSERT INTO `pelanggan` (`pelanggan_id`, `nama`, `email`, `alamat`, `nomor_telep
 --
 
 CREATE TABLE `pemasok` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `nama_pemasok` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nomor_telepon` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -222,7 +229,7 @@ ALTER TABLE `failed_jobs`
 -- Indexes for table `karywan`
 --
 ALTER TABLE `karywan`
-  ADD PRIMARY KEY (`id`);
+  ADD UNIQUE KEY `karywan_email_karyawan_unique` (`email_karyawan`);
 
 --
 -- Indexes for table `migrations`
@@ -247,7 +254,7 @@ ALTER TABLE `pelanggan`
 -- Indexes for table `pemasok`
 --
 ALTER TABLE `pemasok`
-  ADD PRIMARY KEY (`id`);
+  ADD UNIQUE KEY `pemasok_email_unique` (`email`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -288,28 +295,16 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `karywan`
---
-ALTER TABLE `karywan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
   MODIFY `pelanggan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `pemasok`
---
-ALTER TABLE `pemasok`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
